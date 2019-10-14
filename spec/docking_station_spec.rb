@@ -37,6 +37,16 @@ describe DockingStation do
       end
     }.to raise_error
   end
+
+  it 'can accept a custom capacity' do
+    docking_station = DockingStation.new(10)
+    expect(docking_station.max_capacity).to eq 10
+  end
+
+  it 'has a default capacity of 20' do
+    docking_station = DockingStation.new
+    expect(docking_station.max_capacity).to eq 20
+  end
 end
 
 
