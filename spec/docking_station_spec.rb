@@ -12,14 +12,12 @@ describe DockingStation do
     expect(docking_station.bikes.length).to eq 0
     expect(bike).to be_a(Bike)
   end
-
   it 'should dock a bike' do
     docking_station = DockingStation.new
     bike = Bike.new
     docking_station.dock_bike(bike)
     expect(docking_station.bikes.length).to eq 2
   end
-
   it 'cannot release a bike if there are no bikes available' do
     docking_station = DockingStation.new
     expect { 
@@ -28,7 +26,6 @@ describe DockingStation do
       end
     }.to raise_error
   end
-
   it 'docking station cannot accept more bikes than its capacity' do
     docking_station = DockingStation.new
     expect {
@@ -37,7 +34,6 @@ describe DockingStation do
       end
     }.to raise_error
   end
-
   it 'can accept a custom capacity' do
     docking_station = DockingStation.new(10)
     expect(docking_station.max_capacity).to eq 10
@@ -47,6 +43,15 @@ describe DockingStation do
     docking_station = DockingStation.new
     expect(docking_station.max_capacity).to eq 20
   end
+
+  it 'can report a bike as broken' do
+    docking_station = DockingStation.new
+    docking_station.report("Broken bike docked")
+    expect(docking_station.reports).to include("Broken bike docked")
+  end
+
+
+
 end
 
 
