@@ -20,7 +20,14 @@ describe DockingStation do
     expect(docking_station.bikes.length).to eq 2
   end
 
-    
+  it 'cannot release a bike if there are no bikes available' do
+    docking_station = DockingStation.new
+    expect { 
+      2.times do 
+        docking_station.release_bike
+      end
+    }.to raise_error
+  end
 end
 
 
