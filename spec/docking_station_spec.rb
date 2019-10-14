@@ -28,6 +28,15 @@ describe DockingStation do
       end
     }.to raise_error
   end
+
+  it 'docking station cannot accept more bikes than its capacity' do
+    docking_station = DockingStation.new
+    expect {
+      docking_station.max_capacity.times do
+        docking_station.dock_bike(Bike.new)
+      end
+    }.to raise_error
+  end
 end
 
 
