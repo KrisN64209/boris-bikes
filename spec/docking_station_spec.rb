@@ -1,14 +1,42 @@
-require './lib/docking_station.rb'
+require 'docking_station'
 
 describe DockingStation do
-    it 'should create a new instance of the DockingStation class' do
-      new_dock = DockingStation.new
-      expect(new_dock).to be_a(DockingStation)
-    end
+  it 'should create a new instance of the DockingStation class' do
+    docking_station = DockingStation.new
+    expect(docking_station).to be_a(DockingStation)
+  end
 
-    it 'should pass instances of the Bike class to bikes instance variable' do
+  it 'should release a bike' do
+    docking_station = DockingStation.new
+    bike = docking_station.release_bike 
+    expect(docking_station.bikes.length).to eq 0
+    expect(bike).to be_a(Bike)
+  end
+
+  it 'should dock a bike' do
+    docking_station = DockingStation.new
+    bike = Bike.new
+    docking_station.dock_bike(bike)
+    expect(docking_station.bikes.length).to eq 2
+  end
+
+    
+end
+
+
+
+
+
+
+
+
+
+
+
+
+=begin    it 'should add instances of the Bike class to storage' do
 			new_dock = DockingStation.new
-			expect(new_dock).to respond_to(:dock).with(1).argument
+			expect(new_dock).to respond_to(:dock).with(Bike.n).argument
     end
 
     it 'should release bike from docking station' do
@@ -25,7 +53,9 @@ describe DockingStation do
       new_bike = Bike.new
       expect(subject.dock(new_bike)).to eq new_bike
     end
-
-
-
-end
+    
+    it 'can confirm there is a bike in the dock'
+     new_dock = DockingStation.new
+     expect(new_dock.is_bike_docked?)
+    end
+=end
