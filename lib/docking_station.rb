@@ -18,26 +18,24 @@ class DockingStation
     @bikes.length == 0
   end
 
-  def dock_bike(bike)
+  def dock_bike(bike, status)
+    @status = status
     if full?
       raise "Error. Docking station is full!"
-    else
-      @bikes << bike
+    elsif @status = "broken"
+      bike.working = false 
     end
+    @bikes << bike
   end
 
   private def full?
     @bikes.length == @max_capacity
   end
-end
   
-=begin
-
-  def release_bike
-    Bike.new
-	end
-	
-  def dock(bike)
-    @bike = bike
-  end
-=end
+  # def report(bike, status)
+  #   @status = status
+  #   if @status = "broken"
+  #     bike.working = false
+  #   end
+  # end
+end

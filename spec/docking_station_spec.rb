@@ -15,7 +15,7 @@ describe DockingStation do
   it 'should dock a bike' do
     docking_station = DockingStation.new
     bike = Bike.new
-    docking_station.dock_bike(bike)
+    docking_station.dock_bike(bike, "working")
     expect(docking_station.bikes.length).to eq 2
   end
   it 'cannot release a bike if there are no bikes available' do
@@ -46,7 +46,8 @@ describe DockingStation do
   
   it 'can report a bike as broken' do
     docking_station = DockingStation.new
-    docking_station.dock_bike(bike).report(status)
+    bike = Bike.new
+    docking_station.dock_bike(bike, "broken")
     expect(bike.working?).to eq false
   end
 end
