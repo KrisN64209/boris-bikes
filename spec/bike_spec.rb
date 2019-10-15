@@ -8,7 +8,7 @@ describe Bike do
 	
 	it 'tells you if the bike is working' do
 		new_bike = Bike.new
-		new_bike.working
-		expect(new_bike.working).to eq 'Bike working'
+		new_bike.working?
+		expect(new_bike.working?).to eq true
 	end
 end
