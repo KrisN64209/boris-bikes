@@ -43,16 +43,14 @@ describe DockingStation do
     docking_station = DockingStation.new
     expect(docking_station.max_capacity).to eq 20
   end
-end
-
-=begin
-
+  
   it 'can report a bike as broken' do
     docking_station = DockingStation.new
-    docking_station.report("Broken bike docked")
-    expect(docking_station.reports).to include("Broken bike docked")
+    docking_station.dock_bike(bike).report(status)
+    expect(bike.working?).to eq false
   end
-=end
+end
+
 
 
 
