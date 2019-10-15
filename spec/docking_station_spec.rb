@@ -6,17 +6,18 @@ describe DockingStation do
     expect(docking_station).to be_a(DockingStation)
   end
 
-  it 'should release a bike' do
+  it 'should release a bike if working' do
     docking_station = DockingStation.new
-    bike = docking_station.release_bike 
-    expect(docking_station.bikes.length).to eq 0
-    expect(bike).to be_a(Bike)
+    bike = Bike.new
+    docking_station.dock_bike(bike)
+    docking_station.release_bike
+    expect(docking_station.bikes).to be_empty
   end
   it 'should dock a bike' do
     docking_station = DockingStation.new
     bike = Bike.new
-    docking_station.dock_bike(bike, "working")
-    expect(docking_station.bikes.length).to eq 2
+    docking_station.dock_bike(bike)
+    expect(docking_station.bikes.length).to eq 1
   end
   it 'cannot release a bike if there are no bikes available' do
     docking_station = DockingStation.new
@@ -24,15 +25,17 @@ describe DockingStation do
       2.times do 
         docking_station.release_bike
       end
-    }.to raise_error
+    }.to raise_error("Error. No bikes available!")
   end
   it 'docking station cannot accept more bikes than its capacity' do
     docking_station = DockingStation.new
+    bike = Bike.new
+    docking_station.dock_bike(bike)
     expect {
       docking_station.max_capacity.times do
         docking_station.dock_bike(Bike.new)
       end
-    }.to raise_error
+    }.to raise_error("Error. Docking station is full!")
   end
   it 'can accept a custom capacity' do
     docking_station = DockingStation.new(10)
@@ -57,7 +60,7 @@ describe DockingStation do
     docking_station.dock_bike(bike, "broken")
     expect{
       docking_station.release_bike
-    }.to raise_error("Sorry, this bike is broken")
+    }.to raise_error("This bike is broken")
   end
 end
 
