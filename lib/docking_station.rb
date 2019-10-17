@@ -8,6 +8,10 @@ class DockingStation
     @max_capacity = capacity
   end
 
+  def release_broken_bikes
+
+  end
+
   def release_bike
     if empty?
       raise "Error. No bikes available!"

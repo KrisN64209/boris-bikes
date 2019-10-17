@@ -8,8 +8,11 @@ describe DockingStation do
 
   it 'should release a bike if working' do
     docking_station = DockingStation.new
-    docking_station.dock_bike double(:bike)
-    docking_station.release_bike
+    bike = double(:bike)
+    docking_station.dock_bike(bike)
+    allow(bike).to receive(:working?).and_return(true)
+    released_bike = docking_station.release_bike
+    expect(released_bike).to be_working
     expect(docking_station.bikes).to be_empty
   end
   it 'should dock a bike' do
@@ -48,6 +51,8 @@ describe DockingStation do
   it 'can report a bike as broken' do
     docking_station = DockingStation.new
     bike = double(:bike)
+    allow(bike).to receive(:working=).and_return(false)
+    allow(bike).to receive(:working?).and_return(false)
     docking_station.dock_bike(bike, "broken")
     expect(bike.working?).to eq false
   end
@@ -55,6 +60,7 @@ describe DockingStation do
   it 'does not release broken bikes' do
     docking_station = DockingStation.new
     bike = double(:bike)
+    allow(bike).to receive(:working=).and_return(false)
     docking_station.dock_bike(bike, "broken")
     expect{
       docking_station.release_bike
