@@ -9,7 +9,11 @@ class DockingStation
   end
 
   def release_broken_bikes
-
+    broken_bikes = @bikes.select {
+      |bike| !bike.working?
+    }
+    @bikes -= broken_bikes
+    return broken_bikes
   end
 
   def release_bike
