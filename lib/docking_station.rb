@@ -35,11 +35,4 @@ class DockingStation
   private def full?
     @bikes.length == @max_capacity
   end
-  
-  # def report(bike, status)
-  #   @status = status
-  #   if @status = "broken"
-  #     bike.working = false
-  #   end
-  # end
 end
